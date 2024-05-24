@@ -6,7 +6,7 @@ router.get('/',(res,resp)=>{
     resp.send("Hello from auth")
 });
 
-router.get('/login',loginUser);
+router.post('/login',loginUser);
 
 router.post('/signup',createUser);
 

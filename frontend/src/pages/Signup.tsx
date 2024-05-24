@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const Signup = () => {
@@ -7,7 +7,7 @@ const Signup = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [err,setErr]=React.useState('');
-
+  const navigate=useNavigate();
   const handleSubmit= async()=>{
     const data={
       username,
@@ -15,8 +15,14 @@ const Signup = () => {
       password
     }
 
-    //todo
-    // await axios.post('http://localhost:3000/auth/signup',data);
+    try{
+    const resp=await axios.post('http://localhost:3000/auth/signup',data);
+    console.log(resp)
+    navigate(`/login`);
+    }catch(e){
+      console.log(e)
+      setErr(e?.response?.data?.error);
+    }
   }
 
   return (
